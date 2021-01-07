@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Pickering is Roshambo</title>
+<style>
+
+.wrapper {
+	display: flex;  
+	flex-flow:  wrap;
+	font-weight: bold;
+	text-align: center;
+}
+
+.wrapper > * {
+  padding: 10px;
+  flex: 1 100%;
+}
+
+.nav {
+	background: lightgrey;
+}
+
+.header {
+	background: deepskyblue;
+}
+
+.footer {
+	background: lightgreen;
+}
+
+.main {
+	background: whitesmoke;
+	flex: 3 1;
+	font-weight: normal;
+}
+
+.aside {
+	background: gold;
+	flex: 1 1;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+	<nav class="nav">Nav</nav>
+	<header class="header">Header</header>
+	<aside class="aside aside-1">Aside 1</aside>
+	<article class="article main">
+
+<!-- ***************************************************** -->
+
+	<div id="results" class="results"><b>Welcome to Roshambo Inc!</b></div>
+	
+	<p>Which one will it be?<p>
+	<a href="#" onclick="playRoshambo('paper')">paper</a>
+	<a href="#" onclick="playRoshambo('rock')">rock</a>
+	<a href="#" onclick="playRoshambo('scissors')">scissors</a>
+	<br/>
+	
+	<div id="results-1" class="results">  </div>
+
+<!-- ***************************************************** -->
+
+	</article>
+	<aside class="aside aside-2">Aside 2</aside>
+	<footer class="footer">Footer</footer>
+</div>
+
+<script>
+
+let history = new Array();
+
+//server always chooses rock
+playRoshambo = function(clientGesture){
+	if (clientGesture=='paper') {
+		result = "win";
+	}
+	if (clientGesture=='rock') {
+		result = "tie";
+	}
+	if (clientGesture=='scissors') {
+		result = "lose";
+	}	
+
+	gameSummary = new Object();
+	gameSummary.result = result;
+	gameSummary.clientGesture = clientGesture;
+	gameSummary.serverGesture = "rock";
+	gameSummary.timePlayed = new Date();
+	
+	history.push(gameSummary);
+
+	for (gs in history) {
+		console.log(history[gs].result + " : " + history[gs].clientGesture + " : " + history[gs].timePlayed);
+	}
+	
+	var x = document.getElementsByClassName("results");
+	for (i = 0; i < x.length; i++) {
+		x[i].innerHTML = gameSummary.result;
+	}
+	
+	
+}
+
+</script>
+
+
+</body>
+</html>
